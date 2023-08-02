@@ -1,0 +1,29 @@
+	// download
+	@Autowired
+	ServletContext servletContext;
+	
+	@GetMapping("fileDownload")
+	public ResponseEntity<InputStreamResource> filedownload(String filename, 
+			HttpServletRequest request) throws Exception{
+		System.out.println("HelloController filedownload " + new Date());
+		
+		// 경로
+		String path = request.getServletContext().getRealPath("/upload");
+		// String path = "d:\tmp";
+		
+		// 파일의 타입을 조사
+		MediaType mediaType = MediaTypeUtiles.getMediaTypeForFileName(servletContext, filename);
+		System.out.println("filename:" + filename);
+		System.out.println("mediaType:" + mediaType);
+		
+		File file = new File(path + File.separator + filename);
+		
+		InputStreamResource is = new InputStreamResource(new FileInputStream(file));
+		
+		// db download count를 증가
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName()) // 원본파일명
+				.contentType(mediaType)
+				.contentLength(file.length()).body(is);		
+	}

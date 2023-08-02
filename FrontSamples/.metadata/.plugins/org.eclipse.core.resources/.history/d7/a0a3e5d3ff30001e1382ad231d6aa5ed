@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h3>file upload</h3>
+
+<p id="result">...</p>
+
+<form id="uploadFileFrm">
+	번호: <input type="text" id="number"><br>
+	이름: <input type="text" id="name"><br>
+	주소: <input type="text" id="address"><br>
+</form>
+</body>
+</html>

@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\FrontSamples\.metadata\.plugins\org.eclipse.jdt.core
+2072482133.index
+1865797976.index
+3801006319.index

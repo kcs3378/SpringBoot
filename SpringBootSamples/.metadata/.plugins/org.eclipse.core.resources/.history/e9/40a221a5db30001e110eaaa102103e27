@@ -1,0 +1,20 @@
+package ssg.com.a.dto;
+
+public class HumanDto {
+	private int number;
+	private String name;
+	private String address;
+	
+	public HumanDto() {
+		
+	}
+
+	public HumanDto(int number, String name, String address) {
+		super();
+		this.number = number;
+		this.name = name;
+		this.address = address;
+	}
+	
+	
+}
