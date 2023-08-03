@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h3>회원정보</h3>
+<table border="1">
+<thead>
+	<tr>
+		<th>번호</th><th>id</th><th>password</th><th>name</th><th>email</th>
+	</tr>
+</thead>
+<tbody id="data">
+
+</tbody>
+</table>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		url:"http://localhost:3000/allMember",
+		type:"get",
+		success:function(memlist){
+			//alert('success');
+			for(let i = 0; i < memlist.length; i++){
+				let str = "<tr>";
+				str += "<td>" + (i + 1) + "</td>";
+				str += "<td>" + memlist[i].id + "</td>";
+				str += "<td>" + memlist[i].pwd + "</td>";
+				str += "<td>" + memlist[i].name + "</td>";
+				str += "<td>" + memlist[i].email + "</td>";
+				str += "</tr>";
+				
+				$("#data").append(str);
+			}
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
