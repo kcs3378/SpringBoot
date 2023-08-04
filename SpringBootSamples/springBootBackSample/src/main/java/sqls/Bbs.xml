@@ -4,11 +4,74 @@
 
 <mapper namespace="ssg.com.a.dao.BbsDao">
 <select id="bbsList" parameterType="ssg.com.a.dto.BbsParam"
-resultType="ssg.com.a.dto.BbsDto">
-select seq, id, ref, step, depth,
-title, content, wdate, del, readcount
-from bbs
-order by ref desc, step asc
+	resultType="ssg.com.a.dto.BbsDto">
+	select seq, id, ref, step, depth,
+		title, content, wdate, del, readcount
+	from bbs
+	<if test="choice != null and choice != '' and search != null and search != '' ">
+		<if test="choice == 'title'">
+			where title like concat('%', #{search}, '%') and del=0
+		</if>
+		<if test="choice == 'content'">
+			where content like concat('%', #{search}, '%') and del=0
+		</if>
+		<if test="choice == 'writer'">
+			where id=#{search} and del=0
+		</if>
+	</if>
+	order by ref desc, step asc
+	limit ${(pageNumber * 10)}, 10
+</select>
+<select id="getAllBbs" parameterType="ssg.com.a.dto.BbsParam"
+	resultType="java.lang.Integer">
+	select count(*)
+	from bbs
+	<if test="choice != null and choice != '' and search != null and search != '' ">
+		<if test="choice == 'title'">
+			where title like concat('%', #{search}, '%') and del=0
+		</if>
+		<if test="choice == 'content'">
+			where content like concat('%', #{search}, '%') and del=0
+		</if>
+		<if test="choice == 'writer'">
+			where id=#{search} and del=0
+		</if>
+	</if>
 </select>
 
+<insert id="bbsWriteAf" parameterType="ssg.com.a.dto.BbsDto">
+	insert into bbs(id, ref, step, depth, title, content, wdate, del, readcount)
+	values(#{id}, (select ifnull(max(ref), 0)+1 from bbs b), 0, 0, 
+			#{title}, #{content}, now(), 0, 0)
+</insert>
+
+<select id="bbsDetail" parameterType="java.lang.Integer" 
+				resultType="ssg.com.a.dto.BbsDto">
+	select seq, id, ref, step, depth, title, content, wdate, del, readcount
+	from bbs
+	where seq=#{seq}
+</select>
+
+<update id="bbsUpdate" parameterType="ssg.com.a.dto.BbsDto" >
+	update bbs
+	set title=#{title}, content=#{content}
+	where seq=#{seq}
+</update>
+<!-- 답글 -->
+<!-- 수정 -->
+<update id="bbsAnswerUpdate" parameterType="ssg.com.a.dto.BbsDto">
+	update bbs
+	set step=step+1
+	where ref=(select ref from (select ref from bbs a where seq=#{seq}) A)
+		and step>(select step from (select step from bbs b where seq=#{seq}) B)
+</update>
+
+<!-- 추가 -->
+<insert id="bbsAnswerInsert" parameterType="ssg.com.a.dto.BbsDto">
+	insert into bbs(id, ref, step, depth, title, content, wdate, del, readcount)
+	values(#{id}, (select ref from bbs a where seq=#{seq}),
+				  (select step from bbs b where seq=#{seq})+1,
+				  (select depth from bbs c where seq=#{seq})+1,
+			#{title}, #{content}, now(), 0, 0)
+</insert>
 </mapper>

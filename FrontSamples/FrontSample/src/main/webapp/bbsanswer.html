@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<style type="text/css">
+.center{
+	margin: auto;
+	width: 800px;		
+}
+th{
+	background: royalblue;
+	color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+
+<h2>기본글</h2>
+
+<table class="table table-bordered">
+<col width="200"><col width="500">
+
+<tr>
+	<th>작성자</th>
+	<td id="id"></td>
+</tr>
+<tr>
+	<th>작성일</th>
+	<td id="wdate"></td>
+</tr>
+<tr>
+	<th>조회수</th>
+	<td id="readcount"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td id="title"></td>
+</tr>
+<tr>	
+	<td colspan="2">
+		<textarea rows="20" cols="50" class="form-control" id="content" readonly="readonly"></textarea>
+	</td>
+</tr>
+</table>
+
+<h2>답글</h2>
+
+<table class="table table-bordered">
+<col width="200"><col width="500">
+
+<tr>
+	<th>아이디</th>
+	<td>
+		<input type="text" id="userId" class="form-control" size="50" readonly="readonly">
+	</td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td>
+		<input type="text" id="userTitle" class="form-control" size="50">
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="10" cols="50" class="form-control" id="userContent"></textarea>
+	</td>
+</tr>
+</table>
+
+<button type="button" class="btn btn-primary">작성완료</button>
+
+</div>
+
+<br><br><br>
+
+<script type="text/javascript">
+// sequence 취득
+const url = new URL(location.href);
+const urlParams = url.searchParams;
+let seq = urlParams.get("seq");
+
+// id 취득
+let login = sessionStorage.getItem("login");
+let id = (JSON.parse(login)).id;
+$("#userId").val(id);
+
+$.ajax({
+	url:"http://localhost:3000/bbsDetail",
+	type:"get",
+	data:{ "seq":seq },
+	success:function(bbs){
+		// alert('success');
+		$("#id").text(bbs.id);
+		$("#wdate").text(bbs.wdate);
+		$("#readcount").text(bbs.readcount);
+		$("#title").text(bbs.title);
+		$("#content").text(bbs.content);		
+	},
+	error:function(){
+		alert('error');
+	}
+});	
+
+$("button").click(function () {
+	
+	// 제목과 내용을 잘 기입하였는지 검사
+	
+	$.ajax({
+		url:"http://localhost:3000/bbsAnswer",
+		type:"get",
+		data:{ "seq":seq, "id":$("#userId").val(), "title":$("#userTitle").val(), "content":$("#userContent").val() },
+		success:function(msg){
+			if(msg == "YES"){
+				alert("답글을 작성했습니다");
+				location.href = "bbslist.html";
+			}else{
+				alert("답글을 다시 작성해 주세요");
+			}
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+});
+
+</script>
+
+</body>
+</html>

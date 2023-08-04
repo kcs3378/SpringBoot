@@ -13,4 +13,14 @@ import ssg.com.a.dto.BbsParam;
 public interface BbsDao {
 
 	List<BbsDto> bbsList(BbsParam param);
+	int getAllBbs(BbsParam param);
+	
+	int bbsWriteAf(BbsDto dto);
+	
+	BbsDto bbsDetail(int seq);
+	
+	int bbsUpdate(BbsDto dto);
+	
+	void bbsAnswerUpdate(BbsDto bbs);
+	int bbsAnswerInsert(BbsDto bbs);
 }
