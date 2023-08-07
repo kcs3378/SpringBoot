@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdsdetail</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>자료상세보기</h1>
+<hr>
+
+<div align="center">
+
+<table border="1">
+<col width="150px"><col width="500px">
+<tr>
+	<th>아이디</th>
+	<td id="id"></td>
+</tr>
+<tr>
+	<th>다운로드수</th>
+	<td id="downcount"></td>
+</tr>
+<tr>
+	<th>조회수</th>
+	<td id="readcount"></td>
+</tr>
+<tr>
+	<th>등록일</th>
+	<td id="regdate"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td id="title"></td>
+</tr>
+<tr>
+	<th>다운로드</th>
+	<td><!--  id="filename" -->
+		&nbsp;&nbsp;
+			<!-- <a href="#none" id="filedown"></a> -->
+			<span id="filename"></span>
+			<input type="button" id="filedown" value="다운로드"/>
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="5" cols="50" id="content"></textarea>
+	</td>
+</tr>
+</table>
+
+<button type="button" class="btn btn-primary" id="pdsUpdateBtn">글수정</button>
+
+<button type="button" class="btn btn-primary" id="pdsDeleteBtn">글삭제</button>
+</div>
+
+<script type="text/javascript">
+
+const url = new URL(location.href);
+const urlParams = url.searchParams;
+let seq = urlParams.get("seq"); // 주소창에 파라미터 이름을 적으면 값을 얻을 수 있음
+
+//id 취득
+let login = sessionStorage.getItem("login");
+let id = (JSON.parse(login)).id;
+$("#id").val(id);
+
+
+$(document).ready(function(){
+	$("#pdsUpdateBtn").hide();
+	$("#pdsDeleteBtn").hide();
+	
+	$.ajax({
+		url:"http://localhost:3000/pdsdetail",
+		type: "get",
+		data: {seq:seq},
+		success:function(PdsDto){
+			//alert(JSON.stringify(BbsDto));
+			if (PdsDto != null){
+				$("#id").text(PdsDto.id);
+				$("#downcount").text(PdsDto.downcount);
+				$("#regdate").text(PdsDto.regdate);
+				$("#readcount").text(PdsDto.readcount);
+				$("#title").text(PdsDto.title);
+				$("#filename").text(PdsDto.filename);
+				$("#content").val(PdsDto.content);
+				if($("#filename").text() == null || $("#filename").text() == ""){
+					$("#filedown").hide();
+				}else{
+					$("#filedown").show();
+				}
+				if(PdsDto.id == id){
+					$("#pdsUpdateBtn").show();
+					$("#pdsDeleteBtn").show();
+				}
+			}else{
+				alert("작성글이 없습니다");
+			}
+			
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+	
+});
+$("#filedown").click(function(){
+	location.href = "http://localhost:3000/pdsdownload?seq=" + seq;
+});
+
+$("#pdsUpdateBtn").click(function(){
+	location.href = "pdsupdate.html?seq=" + seq;
+});
+
+$("#pdsDeleteBtn").click(function(){
+	// 여기서 ajax
+	// 그리고 bbslist로 이동
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+

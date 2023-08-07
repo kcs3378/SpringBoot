@@ -1,0 +1,116 @@
+   
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdsupload</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>자료올리기(upload)</h1>
+<br>
+
+<div align="center">
+
+<table border="1">
+<tr>
+	<th>아이디</th>
+	<td>
+		<input type="text" id="id" value="" readonly="readonly">
+		
+	</td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td>
+		<input type="text" id="title" size="50">
+	</td>
+</tr>
+<tr>
+	<th>파일업로드</th>
+	<td>
+		<input type="file" id="fileupload">
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="10" cols="50" id="content"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<button type="button" id="pdsupload">자료올리기</button>
+	</td>
+</tr>
+</table>
+
+</div>
+<script type="text/javascript">
+let login = sessionStorage.getItem("login");
+let id = (JSON.parse(login)).id;
+$("#id").val(id);
+
+$(document).ready(function(){
+	/*
+	$("button").click(function(){
+		// 제목이 비었는지?
+		if( $("#title").val().trim() == ""){
+			alert("제목을 기입해 주십시오");
+			return;
+		}				
+		// 내용이 비었는지?
+		if( $("#content").val().trim() == "" ){
+			alert("내용을 기입해 주십시오");
+			return;
+		}
+		
+		$("#frm").attr("action", "bbswriteAf.do").submit();		
+	});
+	*/
+	
+	
+	$("#pdsupload").click(function(){
+		let formData = new FormData();
+	    formData.append('id', $("#id").val());
+	    formData.append('title', $("#title").val());
+	    formData.append('content', $("#content").val());
+	    formData.append('fileupload', $('#fileupload')[0].files[0]);
+		$.ajax({
+			url:"http://localhost:3000/pdsupload",
+			type:"post",
+			data:formData,
+			enctype:"multipart/form-data",
+			contentType: false,
+            processData: false,
+            cache:false,
+			success:function(msg){
+				alert(msg);
+				if(msg == "YES"){
+					alert("글이 추가되었습니다.");
+					location.href = "pdslist.html";	
+				}else{
+					alert("추가되지 않았습니다.");
+					location.href = "pdsupload.html";
+				}
+			},
+			error:function(){
+				alert('error');
+			}
+		})
+	});
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
