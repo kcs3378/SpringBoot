@@ -122,6 +122,13 @@ public class BbsDto implements Serializable{
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
+
+	@Override
+	public String toString() {
+		return "BbsDto [seq=" + seq + ", id=" + id + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", title="
+				+ title + ", content=" + content + ", wdate=" + wdate + ", del=" + del + ", readcount=" + readcount
+				+ "]";
+	}
 	
 }
 

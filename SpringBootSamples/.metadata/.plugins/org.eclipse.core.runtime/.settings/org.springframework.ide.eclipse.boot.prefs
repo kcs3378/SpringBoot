@@ -1,11 +1,11 @@
 eclipse.preferences.version=1
-org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=springBootBack
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=springBootNaverCloud
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.bootVersion=3.1.2
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.description=Demo project for Spring Boot
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.groupId=com.example
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.javaVersion=17
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.language=java
-org.springframework.ide.eclipse.boot.wizard.PreferredSelections.name=springBootBack
+org.springframework.ide.eclipse.boot.wizard.PreferredSelections.name=springBootNaverCloud
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packageName=ssg.com.a
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.packaging=jar
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.type=MAVEN

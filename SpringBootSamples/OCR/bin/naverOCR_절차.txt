@@ -1,0 +1,13 @@
+절차:
+도메인 생성: https://console.ncloud.com/ocr/domain
+템플릿 빌더 클릭
+도메인 정보 확인
+API Gateway 연동 확인
+Secret Key, API Gateway Invoke URL 확인
+템플릿 목록 > 템플릿 생성
+이미지 업로드 > 템플릿명 기입 > 대표 샘플명 기입 > 필드 지정 > 저장
+배포관리 클릭 > 베타 배포 클릭
+테스트 클릭 > 파일 업로드 > 확인 > 확인 > 테스트 결과 확인
+서비스 배포 클릭 > 확인
+
+Java 파일 실행
