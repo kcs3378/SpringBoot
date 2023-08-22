@@ -15,6 +15,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -132,6 +133,14 @@ public class NaverCloudController {
 		String response = NaverCloud.processObjectDetection(filepath);
 		
 		return response;
+	}
+	
+	@GetMapping("chatBot")
+	public String chatBot(String msg) {
+		System.out.println("NaverCloudController chatBot");
+		
+		String str = NaverCloud.chatBot(msg);
+		return str;
 	}
 }
 
