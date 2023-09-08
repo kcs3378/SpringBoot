@@ -12,7 +12,7 @@ public class MainClass {
 
         StringBuffer reqStr = new StringBuffer();
 		String clientId = "x5qj94rpsh";             // Application Client ID";
-        String clientSecret = "KSSvfj2nMGvc34ctPyqS8RAzI3aZebAh9vlTXBB1";     // Application Client Secret";
+        String clientSecret = "";     // Application Client Secret";
 
         try {
             String paramName = "image"; // 파라미터명은 image로 지정
