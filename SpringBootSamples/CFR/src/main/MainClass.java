@@ -11,8 +11,8 @@ public class MainClass {
     public static void main(String[] args, boolean celebrity) {
 
         StringBuffer reqStr = new StringBuffer();
-        String clientId = "x5qj94rpsh";             // Application Client ID";
-        String clientSecret = "KSSvfj2nMGvc34ctPyqS8RAzI3aZebAh9vlTXBB1";     // Application Client Secret";
+        String clientId = "";             // Application Client ID";
+        String clientSecret = "";     // Application Client Secret";
 
         try {
             String paramName = "image"; // 파라미터명은 image로 지정
