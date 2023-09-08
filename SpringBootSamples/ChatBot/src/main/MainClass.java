@@ -35,7 +35,7 @@ public class MainClass {
 
         try {
             String apiURL = "https://ff209gqdet.apigw.ntruss.com/custom/v1/11454/6cdf273b0cb1a634b9b3b5a29b687d9a4d69a71b5ce9a04330ebfcf274a60415";
-            String secretKey = "Wlp5ZWRzYU1lWWpUbWN3ek9UV3NPVEFsWGVZdVd6V2o=";
+            String secretKey = "";
             String voiceMessage = "안녕하세요";
 
             URL url = new URL(apiURL);
