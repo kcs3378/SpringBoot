@@ -20,7 +20,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		String apiURL = "https://lmu0ibmzsw.apigw.ntruss.com/custom/v1/24439/58433e64a2994cde39fa3e45a421aa8067f49228cad3678155cd3d027aeea45b/infer";
-		String secretKey = "blRjRlpVR1VSRlVodUtFSkNDcUN3R0paQU1wc2N2bXM=";
+		String secretKey = "";
 		String imageFile = "D:\\SpringSample\\SpringBootSamples\\OCR\\src\\carnumbers1.jpg";
 
 		try {
