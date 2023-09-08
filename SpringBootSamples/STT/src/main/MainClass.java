@@ -7,8 +7,8 @@ import java.net.URL;
 public class MainClass {
 
     public static void main(String[] args) {
-        String clientId = "x5qj94rpsh";             // Application Client ID";
-        String clientSecret = "KSSvfj2nMGvc34ctPyqS8RAzI3aZebAh9vlTXBB1";     // Application Client Secret";
+        String clientId = "";             // Application Client ID";
+        String clientSecret = "";     // Application Client Secret";
 
         try {
             String imgFile = "D:\\SpringSample\\SpringBootSamples\\STT\\src\\voice\\sample4.wav";
