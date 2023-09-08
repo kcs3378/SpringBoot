@@ -10,8 +10,8 @@ import java.util.Date;
 public class MainClass {
 
  public static void main(String[] args) {
-	 String clientId = "x5qj94rpsh";             // Application Client ID";
-     String clientSecret = "KSSvfj2nMGvc34ctPyqS8RAzI3aZebAh9vlTXBB1";     // Application Client Secret";
+	 String clientId = "";             // Application Client ID";
+     String clientSecret = "";     // Application Client Secret";
      try {
          String text = URLEncoder.encode("만나서 반갑습니다.", "UTF-8"); // 13자
          String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
