@@ -32,7 +32,7 @@ public class NaverCloud {
 
 	public static String processSTT(String filepath) {
 		String clientId = "x5qj94rpsh";             // Application Client ID";
-        String clientSecret = "KSSvfj2nMGvc34ctPyqS8RAzI3aZebAh9vlTXBB1";     // Application Client Secret";
+        String clientSecret = "";     // Application Client Secret";
 
         StringBuffer response = null;
         
